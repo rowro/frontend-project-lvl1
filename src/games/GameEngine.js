@@ -8,7 +8,6 @@ class GameEngine {
     this.name = '';
     this.currentRound = 0;
     this.maxRounds = 3;
-    this.correctAnswer = null;
   }
 
   checkAnswer(correctAnswer, callback) {

@@ -2,22 +2,20 @@ import GameEngine from './GameEngine.js';
 import { randomNumber, isEven } from '../index.js';
 
 class BrainEven extends GameEngine {
-  writeRandomNumber() {
+  askQuestion() {
     const number = randomNumber();
-    console.log(`Question: ${number}`);
-    this.correctAnswer = isEven(number) ? 'yes' : 'no';
-  }
+    const correctAnswer = isEven(number) ? 'yes' : 'no';
 
-  askNumber() {
-    this.writeRandomNumber();
-    super.checkAnswer(this.correctAnswer, () => this.askNumber());
+    console.log(`Question: ${number}`);
+
+    super.checkAnswer(correctAnswer, () => this.askQuestion());
   }
 
   start() {
     super.start();
 
     console.log('Answer "yes" if the number is even, otherwise answer "no".');
-    super.nextRound(() => this.askNumber());
+    super.nextRound(() => this.askQuestion());
   }
 }
 

@@ -21,3 +21,17 @@ export const calcExpression = (a, operation, b) => {
       return NaN;
   }
 };
+
+export const gcd = (numberOne, numberTwo) => {
+  let a = numberOne >= numberTwo ? numberOne : numberTwo;
+  let b = numberOne >= numberTwo ? numberTwo : numberOne;
+  let remainder = a % b;
+
+  while (remainder > 0) {
+    a = b;
+    b = remainder;
+    remainder = a % b;
+  }
+
+  return b;
+};
