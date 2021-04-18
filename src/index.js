@@ -7,20 +7,20 @@ let name = '';
 let currentRound = 0;
 const MAX_ROUNDS = 3;
 
-export const hello = () => {
+const hello = () => {
   console.log('Welcome to the Brain Games!');
   name = greeting();
 };
 
-export const winGame = () => {
+const winGame = () => {
   console.log(`Congratulations, ${name}!`);
 };
 
-export const gameOver = () => {
+const gameOver = () => {
   console.log(`Let's try again, ${name}!`);
 };
 
-export const nextRound = (callback) => {
+const nextRound = (callback) => {
   if (currentRound < MAX_ROUNDS) {
     currentRound += 1;
     callback();
