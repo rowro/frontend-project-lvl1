@@ -1,22 +1,13 @@
-import GameEngine from './GameEngine.js';
-import { randomNumber, isPrime } from '../index.js';
+import { randomNumber, isPrime } from '../helpers.js';
+import { checkAnswer, startGame } from '../index.js';
 
-class BrainPrime extends GameEngine {
-  askQuestion() {
-    const number = randomNumber();
-    const correctAnswer = isPrime(number) ? 'yes' : 'no';
+const askQuestion = () => {
+  const number = randomNumber();
+  const correctAnswer = isPrime(number) ? 'yes' : 'no';
 
-    console.log(`Question: ${number}`);
+  console.log(`Question: ${number}`);
 
-    super.checkAnswer(correctAnswer, () => this.askQuestion());
-  }
+  checkAnswer(correctAnswer, askQuestion);
+};
 
-  start() {
-    super.start();
-
-    console.log('Answer "yes" if given number is prime. Otherwise answer "no".');
-    super.nextRound(() => this.askQuestion());
-  }
-}
-
-export default BrainPrime;
+export default () => startGame('Answer "yes" if given number is prime. Otherwise answer "no".', askQuestion);

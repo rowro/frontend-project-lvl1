@@ -1,60 +1,48 @@
-export const randomNumber = (min = 0, max = 100) => Math.floor(Math.random() * (max - min)) + min;
+import readlineSync from 'readline-sync';
+import {
+  correctAnswerMessage, greeting, wrongAnswerMessage,
+} from './cli.js';
 
-export const isEven = (num) => num % 2 === 0;
+let name = '';
+let currentRound = 0;
+const MAX_ROUNDS = 3;
 
-export const randomMathOperation = () => {
-  const operations = ['+', '-', '*'];
-  return operations[randomNumber(0, 3)];
+export const hello = () => {
+  console.log('Welcome to the Brain Games!');
+  name = greeting();
 };
 
-export const calcExpression = (a, operation, b) => {
-  switch (operation) {
-    case '+':
-      return a + b;
-    case '-':
-      return a - b;
-    case '*':
-      return a * b;
-    default:
-      return NaN;
+export const winGame = () => {
+  console.log(`Congratulations, ${name}!`);
+};
+
+export const gameOver = () => {
+  console.log(`Let's try again, ${name}!`);
+};
+
+export const nextRound = (callback) => {
+  if (currentRound < MAX_ROUNDS) {
+    currentRound += 1;
+    callback();
+  } else {
+    winGame();
   }
 };
 
-export const gcd = (numberOne, numberTwo) => {
-  let a = numberOne >= numberTwo ? numberOne : numberTwo;
-  let b = numberOne >= numberTwo ? numberTwo : numberOne;
-  let remainder = a % b;
-
-  while (remainder > 0) {
-    a = b;
-    b = remainder;
-    remainder = a % b;
+export const checkAnswer = (correctAnswer, callback) => {
+  const userAnswer = readlineSync.question('Your answer: ');
+  if (String(userAnswer) === String(correctAnswer)) {
+    correctAnswerMessage();
+    nextRound(callback);
+  } else {
+    wrongAnswerMessage(userAnswer, correctAnswer);
+    gameOver();
   }
-
-  return b;
 };
 
-export const arithmeticProgression = (start, step, length = 10) => {
-  const result = [start];
+export const startGame = (termsMessage, callback) => {
+  hello();
 
-  while (result.length < length) {
-    result.push(result[result.length - 1] + step);
-  }
-
-  return result;
-};
-
-export const isPrime = (num) => {
-  if (num <= 1) return false;
-
-  let divisor = num - 1;
-  while (divisor > 1) {
-    if (num % divisor === 0) {
-      return false;
-    }
-
-    divisor -= 1;
-  }
-
-  return true;
+  console.log(termsMessage);
+  nextRound(callback);
 };
