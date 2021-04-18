@@ -1,6 +1,4 @@
-export const randomNumber = (min = 0, max = 100) => {
-  return Math.floor(Math.random() * (max - min)) + min;
-};
+export const randomNumber = (min = 0, max = 100) => Math.floor(Math.random() * (max - min)) + min;
 
 export const isEven = (num) => num % 2 === 0;
 
@@ -34,4 +32,14 @@ export const gcd = (numberOne, numberTwo) => {
   }
 
   return b;
+};
+
+export const arithmeticProgression = (start, step, length = 10) => {
+  const result = [start];
+
+  while (result.length < length) {
+    result.push(result[result.length - 1] + step);
+  }
+
+  return result;
 };
