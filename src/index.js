@@ -43,3 +43,18 @@ export const arithmeticProgression = (start, step, length = 10) => {
 
   return result;
 };
+
+export const isPrime = (num) => {
+  if (num <= 1) return false;
+
+  let divisor = num - 1;
+  while (divisor > 1) {
+    if (num % divisor === 0) {
+      return false;
+    }
+
+    divisor -= 1;
+  }
+
+  return true;
+};
